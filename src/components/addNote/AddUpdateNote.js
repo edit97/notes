@@ -5,7 +5,7 @@ import {history} from "../../routing/history";
 
 import styles from './addNote.module.css'
 
-const AddNote = ({items, addNotes, updateNotes}) => {
+const AddUpdateNote = ({items, addNotes, updateNotes}) => {
     const [note, setNote] = useState({
         title: '',
         description: '',
@@ -59,4 +59,4 @@ const AddNote = ({items, addNotes, updateNotes}) => {
     )
 }
 
-export default AddNote
+export default AddUpdateNote

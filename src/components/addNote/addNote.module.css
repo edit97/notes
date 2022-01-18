@@ -1,0 +1,35 @@
+.addNote{
+    padding: 30px;
+}
+
+.productsTitle{}
+
+input{
+    display: block;
+    width: 300px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+textarea{
+    display: block;
+    width: 300px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+input:focus, textarea:focus {
+    outline: none;
+}
+
+button{
+    background: black;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    border: 0;
+}

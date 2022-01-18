@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 30px;
+}
+.addBtn{
+    background: black;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+}
+
+.notesList{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+}

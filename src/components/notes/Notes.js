@@ -1,69 +1,28 @@
-import { useEffect, useState } from 'react'
-import ReactNotification from 'react-notifications-component'
-import { store } from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
+import {Link} from "react-router-dom";
 
-import { useProductList } from './useProductList'
-import { useCategoryList } from './useCategoryList'
+import styles from './notes.module.css'
 
-import styles from './Products.module.scss'
-import { ReactComponent as SearchIcon } from '../../assets/images/icons/ic_search.svg'
+import NoteCard from "../noteCard/NoteCard";
 
-import ProductList from '../ProductList/ProductList'
-import Filters from '../Filters/Filters'
+const Notes = ({items, deleteNotes}) => {
+    return (
+        <div className={'root'}>
+            <div className={styles.header}>
+                <h2 className={styles.title}>Notes</h2>
+                <Link to={'/add-note'} className={styles.addBtn}>Add</Link>
+            </div>
+            <div className={styles.notesList}>
 
-const Products = () => {
-  const [search, setSearch] = useState('')
-  const { filter, status, items, updateFilter } = useProductList()
-  const categories = useCategoryList()
-
-  useEffect(() => {
-    if (status === 'error') {
-      store.addNotification({
-        title: 'Bad Request',
-        message: 'Something went wrong!',
-        type: 'danger',
-        insert: 'top',
-        container: 'top-right',
-        animationIn: ['animate__animated', 'animate__fadeIn'],
-        animationOut: ['animate__animated', 'animate__fadeOut'],
-        dismiss: {
-          duration: 5000,
-          onScreen: true,
-        },
-      })
-    }
-  }, [status])
-
-  const handleFilterUpdate = filters => updateFilter({ ...filters })
-
-  const getSearchValue = ({ target }) => {
-    setSearch(target.value)
-  }
-
-  return (
-    <div className={styles.root}>
-      <ReactNotification />
-      <div className={styles.productsHeader}>
-        <h2 className={styles.productsTitle}>Products</h2>
-        <div className={styles.searchInputWrapper}>
-          <SearchIcon className={styles.searchIcon} onClick={() => handleFilterUpdate({ search })} />
-          <input
-            type="text"
-            value={search}
-            onChange={getSearchValue}
-            onKeyDown={e => {
-              e.key === 'Enter' && handleFilterUpdate({ search })
-            }}
-            placeholder={'Search among products'}
-            className={styles.searchInput}
-          />
+                {
+                    !!items.length && items.map((item, index) => {
+                        return <NoteCard note={item} key={index}
+                                         deleteNotes={deleteNotes}
+                                         index={index}/>
+                    })
+                }
+            </div>
         </div>
-      </div>
-      <Filters filter={filter} status={status} categories={categories} handleFilterUpdate={handleFilterUpdate} />
-      <ProductList items={items} />
-    </div>
-  )
+    )
 }
 
-export default Products
+export default Notes

@@ -1,23 +1,26 @@
-import {useEffect, useState} from 'react'
+import {Link} from "react-router-dom";
+import styles from './noteCard.module.css'
+import {ReactComponent as DeleteIcon} from '../../assets/ic_delete.svg'
+import {ReactComponent as EditIcon} from '../../assets/ic_edit.svg'
 
-import styles from './notes.module.scss'
-import {ReactComponent as SearchIcon} from '../../assets/images/icons/ic_search.svg'
-
-const Notes = () => {
-    const [notes, setNotes] = useState([])
-
-    useEffect(() => {
-
-    }, [])
+const NoteCard = ({note, index, deleteNotes}) => {
+    function deleteNote(){
+        deleteNotes(index)
+    }
 
     return (
-        <div className={styles.root}>
-            <h2 className={styles.productsTitle}>Notes</h2>
-            {
-
-            }
+        <div className={styles.noteCard}>
+            <div className={styles.noteTitle}>{note?.title}</div>
+            <div className={styles.noteDescription}>{note?.description}</div>
+            <div className={styles.actions}>
+                <Link to={{
+                    pathname: `update-note/${index}`,
+                }}><EditIcon/></Link>
+                <DeleteIcon className={styles.delete}
+                            onClick={deleteNote}/>
+            </div>
         </div>
     )
 }
 
-export default Notes
+export default NoteCard
